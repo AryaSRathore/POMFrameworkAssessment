@@ -16,9 +16,9 @@ public class LoginPageActions extends CoreActions{
 
     @Step("Get The list of usernames and password")
     public void getUserNameInfo(){
-        loginCredentialsAsString = driver.findElement(LoginPageElements.LOGIN_CREDENTIALS_LIST).getText();
+        loginCredentialsAsString = gettext(LoginPageElements.LOGIN_CREDENTIALS_LIST);
         loginCredentialsAsList = loginCredentialsAsString.split(System.lineSeparator());
-        passwrd = driver.findElement(LoginPageElements.PASSWORD_LOCATOR).getText();
+        passwrd = gettext(LoginPageElements.PASSWORD_LOCATOR);
         pasword = passwrd.split(System.lineSeparator());
 
     }
@@ -27,12 +27,12 @@ public class LoginPageActions extends CoreActions{
     public HomePageActions login(){
         for(int i = 1; i < loginCredentialsAsList.length; i++){
             driver.findElement(LoginPageElements.USERNAME_TXTBOX).clear();
-            driver.findElement(LoginPageElements.USERNAME_TXTBOX).sendKeys(loginCredentialsAsList[i]);
+            enterText(LoginPageElements.USERNAME_TXTBOX, loginCredentialsAsList[i]);
             driver.findElement(LoginPageElements.PASSWORD_TXTBOX).clear();
-            driver.findElement(LoginPageElements.PASSWORD_TXTBOX).sendKeys(pasword[1]);
-            driver.findElement(LoginPageElements.LOGIN_BTN).click();
+            enterText(LoginPageElements.PASSWORD_TXTBOX, pasword[1]);
+            click(LoginPageElements.LOGIN_BTN);
             currentTitle = driver.getTitle();
-            if(currentTitle.equals(LoginPageElements.HOMEPAGETITLE))
+            if(!currentTitle.equals(LoginPageElements.HOMEPAGETITLE))
                 return new HomePageActions(driver);
             else
                 continue;

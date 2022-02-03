@@ -15,13 +15,12 @@ public class AllPageTests extends CoreTest {
     String fetchedHomePageItemPrice;
     LoginPageActions loginPageActions;
 
-    @Test(priority = 1)
-    @Description("")
+    @Test
     public void initloginpageclass(){
         loginPageActions = new LoginPageActions(driver);
     }
-
-    @Test(dependsOnMethods = "initloginpageclass", priority = 2)
+//
+    @Test(dependsOnMethods = "initloginpageclass")
     @Description("Test that launches the website and lets user login and add an item to cart, verify item then proceed to checkout")
     @Severity(SeverityLevel.CRITICAL)
     public void testForLoggingIntoTheWebsiteAndAddingContentsToCart(){
@@ -59,15 +58,6 @@ public class AllPageTests extends CoreTest {
         logStep("Validating if the cart is empty after comleting checkout process");
         cartsPageAction.verifyIfCartIsEmpty();
     }
-
-//    @Test(dependsOnMethods = "testForLoggingIntoTheWebsiteAndAddingContentsToCart", priority = 2)
-//    @Description("Test for checkout page and validating whether the cart is empty after check out is complete, or not")
-//    @Severity(SeverityLevel.NORMAL)
-//    public void testForCheckingOutProcess(){
-//
-//
-//
-//    }
 
 
 }

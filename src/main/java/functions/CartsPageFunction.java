@@ -4,15 +4,12 @@ import objectRepository.CartPageElements;
 import io.qameta.allure.Step;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 public class CartsPageFunction extends CoreActions{
     String currentItemName;
     String currentItemPrice;
-    Boolean result;
     SoftAssert softAssert = new SoftAssert();
-    HomePageActions homePageActions;
 
     public CartsPageFunction(WebDriver driver){
         super(driver);
@@ -20,8 +17,8 @@ public class CartsPageFunction extends CoreActions{
 
     @Step("Verify whether the item name and prices are same or not")
     public void verifyTheItemDetails(String homePageItemName, String homePageItemPrice){
-        currentItemName = driver.findElement(CartPageElements.ITEM_NAME).getText();
-        currentItemPrice = driver.findElement(CartPageElements.ITEM_PRICE).getText();
+        currentItemName = gettext(CartPageElements.ITEM_NAME);
+        currentItemPrice = gettext(CartPageElements.ITEM_PRICE);
 
         softAssert.assertEquals(currentItemName, homePageItemName);
         softAssert.assertEquals(currentItemPrice, homePageItemPrice);
@@ -29,7 +26,7 @@ public class CartsPageFunction extends CoreActions{
 
     @Step("Perform Checkout Operation")
     public CheckoutPageActions checkOut(){
-        driver.findElement(CartPageElements.CHECKOUT).click();
+        click(CartPageElements.CHECKOUT);
         return new CheckoutPageActions(driver);
     }
 
