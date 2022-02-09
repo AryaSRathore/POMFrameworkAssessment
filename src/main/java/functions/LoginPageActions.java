@@ -32,7 +32,7 @@ public class LoginPageActions extends CoreActions{
             enterText(LoginPageElements.PASSWORD_TXTBOX, pasword[1]);
             click(LoginPageElements.LOGIN_BTN);
             currentTitle = driver.getTitle();
-            if(!currentTitle.equals(LoginPageElements.HOMEPAGETITLE))
+            if(currentTitle.equals(LoginPageElements.HOMEPAGETITLE))
                 return new HomePageActions(driver);
             else
                 continue;
